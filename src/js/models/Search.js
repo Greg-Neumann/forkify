@@ -13,10 +13,11 @@ export default class Search {
     async recipeAPIAW() {
         const res = await fetch(`https://forkify-api.herokuapp.com/api/search?&q=${this.query}`);
         if (res.ok) {
-            this.recipeList = await res.json(); // add the list to a property on the Class
+            const list = await res.json(); // add the list to a property on the Class
+            this.recipeList = list.recipes;
             //console.log(this.recipeList)
         } else {
-            console.error('Recipe not found')
+            console.info('Recipe not found')
         }
     };
 }

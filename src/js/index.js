@@ -21,10 +21,14 @@ const controlSearch = async () => { /* Needs to be 'async' as there is an 'await
        Now do the asynchronous fetch 
        */
        await state.search.recipeAPIAW() // Do the query call
-       console.log('**controlSearch results now immediately follow**')
-       console.log(state.search.recipeList) 
-       console.log('**controlSearch results now completed**')
-
+       /*
+       Now render the retrieved list from the State 
+       */
+        if (state.search.recipeList) {
+            searchView.clearInput();
+            searchView.clearResults();
+            searchView.renderResults(state.search.recipeList);
+        } 
     }
 };
 elements.searchForm.addEventListener('submit', e => {
