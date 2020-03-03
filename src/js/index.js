@@ -1,4 +1,6 @@
 import searchAPI from "./models/Search";
+import { elements } from "./views/base";              /* HTML DOM Elements */
+import * as searchView from "./views/searchView";   
 
 /*
 Define a store for the global state of the app. This state will track:
@@ -9,12 +11,15 @@ Define a store for the global state of the app. This state will track:
 */
 const state = {};
 const controlSearch = async () => { /* Needs to be 'async' as there is an 'await' in this block */
-    const query = 'pizza'; //TODO - need to get from the DOM
+    const query = searchView.getInput();
     if (query) {
         /*
-        If we actually have a query, then update the State for that query
+        If we actually have a query, then update the State for that query with the new instance of the Class
         */
        state.search = new searchAPI(query);
+       /*
+       Now do the asynchronous fetch 
+       */
        await state.search.recipeAPIAW() // Do the query call
        console.log('**controlSearch results now immediately follow**')
        console.log(state.search.recipeList) 
@@ -22,11 +27,7 @@ const controlSearch = async () => { /* Needs to be 'async' as there is an 'await
 
     }
 };
-const DOMStrings = {
-    inputSearch: '.search'
-};
-
-document.querySelector(DOMStrings.inputSearch).addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', e => {
     e.preventDefault(); // stop the page re-loading upon pressing of the search submit button
     controlSearch();
 })
