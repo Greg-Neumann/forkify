@@ -1,5 +1,5 @@
 import searchAPI from "./models/Search";
-import { elements } from "./views/base";              /* HTML DOM Elements */
+import { elements, renderSpinner, clearSpinner} from "./views/base";              /* HTML DOM Elements */
 import * as searchView from "./views/searchView";   
 
 /*
@@ -13,6 +13,7 @@ const state = {};
 const controlSearch = async () => { /* Needs to be 'async' as there is an 'await' in this block */
     const query = searchView.getInput();
     if (query) {
+        renderSpinner(elements.resultsColumn);
         /*
         If we actually have a query, then update the State for that query with the new instance of the Class
         */
@@ -21,6 +22,7 @@ const controlSearch = async () => { /* Needs to be 'async' as there is an 'await
        Now do the asynchronous fetch 
        */
        await state.search.recipeAPIAW() // Do the query call
+       clearSpinner();
        /*
        Now render the retrieved list from the State 
        */
