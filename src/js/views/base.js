@@ -1,8 +1,9 @@
 export const elements = {
-    searchForm: document.querySelector('.search'),              /* The search form submit button */
-    searchInput: document.querySelector('.search__field'),      /* The search form input field */
-    searchResultsList: document.querySelector('.results__list'),/* DOM render position for a new results item */
-    resultsColumn: document.querySelector('.results')           /* The whole left hand results column */
+    searchForm: document.querySelector('.search'),                  /* The search form submit button */
+    searchInput: document.querySelector('.search__field'),          /* The search form input field */
+    searchResultsList: document.querySelector('.results__list'),    /* DOM render position for a new results item */
+    resultsColumn: document.querySelector('.results'),              /* The whole left hand results column */
+    resultsPagenation : document.querySelector('.results__pages')   /* Where the results pagenation buttons go */
 };
 const elementStrings = {
     loader: 'loader'    /* Class name for the loading spinner */

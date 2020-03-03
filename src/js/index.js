@@ -38,3 +38,16 @@ elements.searchForm.addEventListener('submit', e => {
     controlSearch();
 })
 
+elements.resultsPagenation.addEventListener('click', event => {
+    /*
+    The pagenation button is a composite of the button itself, the SVG image and the text.
+    Use the 'closest' method to return the class of the full button pressed.
+    If there is a button pressed, then use HTML5 'goto' method to retrieve the page number off the DOM
+    */
+    const closestToThePagenationButton = event.target.closest('.btn-inline');
+    if (closestToThePagenationButton){
+        const theGoToPage = parseInt(closestToThePagenationButton.dataset.goto);
+        searchView.clearResults();
+        searchView.renderResults(state.search.recipeList,theGoToPage);
+    }
+})

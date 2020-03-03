@@ -14,6 +14,7 @@ Utility function to clear the previously rendered results
 */
 export const clearResults = () => {
     elements.searchResultsList.innerHTML = ''; /* you clear rendered HTML !*/
+    elements.resultsPagenation.innerHTML = '';
 };
 /*
 Utility function, used within this module, to keep the recipe title as whole words on one line
@@ -59,7 +60,42 @@ const renderRecipe = recipe => {
     elements.searchResultsList.insertAdjacentHTML('beforeend', markUP); /* Add new results to end of list */
 };
 /*
+Utility function to add the pagenation buttons.The HTML 5 GoTo attribute is set and is subsequently read in index.js
+*/
+const createButton = (currentPage, pagenationDirection) => `
+    <button class="btn-inline results__btn--${pagenationDirection === "forward" ? 'next' : 'prev' }" data-goto=${pagenationDirection === "forward" ? currentPage + 1 : currentPage - 1 }>
+        <span>Page ${pagenationDirection === "forward" ? currentPage + 1 : currentPage - 1 }</span>
+        <svg class="search__icon">
+            <use href="img/icons.svg#icon-triangle-${pagenationDirection === "forward" ? 'right' : 'left' }"></use>
+        </svg>
+    </button>
+`;
+const renderPageButtons = (currentPage, totalNumberOfRecipes, resultsPerPage) => {
+    const totalPages = Math.ceil(totalNumberOfRecipes / resultsPerPage);
+    let buttonToUse;
+    switch (true) {
+        case (currentPage === 1 && totalPages > 1) :
+            buttonToUse = createButton(currentPage,'forward');
+            break;
+        case (currentPage === totalPages && totalPages > 1) :
+            buttonToUse = createButton(currentPage, 'back');
+            break;
+        default:
+            buttonToUse = `${createButton(currentPage,'back')} ${createButton(currentPage,'forward')}`;
+            break;
+    }
+    elements.resultsPagenation.insertAdjacentHTML('afterbegin',buttonToUse);
+}
+/*
 Utility function to render the current search results to the DOM
 */
-export const renderResults = recipeList => recipeList.forEach(renderRecipe);
+export const renderResults = (recipeList, page = 1, resultsPerPage = 10) => {
+    /*
+    Render results for the *current page* of all of the results.
+    */
+    const firstRecipeIndex = (page - 1) * resultsPerPage;
+    const lastRecipeIndex = resultsPerPage * page;
+    recipeList.slice(firstRecipeIndex,lastRecipeIndex).forEach(renderRecipe)
+    renderPageButtons(page,recipeList.length,resultsPerPage);
+};
 
