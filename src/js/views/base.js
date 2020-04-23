@@ -3,7 +3,10 @@ export const elements = {
     searchInput: document.querySelector('.search__field'),          /* The search form input field */
     searchResultsList: document.querySelector('.results__list'),    /* DOM render position for a new results item */
     resultsColumn: document.querySelector('.results'),              /* The whole left hand results column */
-    resultsPagenation : document.querySelector('.results__pages')   /* Where the results pagenation buttons go */
+    resultsPagenation : document.querySelector('.results__pages'),  /* Where the results pagenation buttons go */
+    resultsRecipe: document.querySelector('.results_link'),         /* Each individual recipe on LHS */
+    resultsRecipeDetail: document.querySelector('.recipe'),          /* The recipe detail in the middle */
+    resultsRecipeIngredients: document.querySelector('.recipe__ingredients')
 };
 const elementStrings = {
     loader: 'loader'    /* Class name for the loading spinner */

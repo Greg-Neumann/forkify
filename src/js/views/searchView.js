@@ -44,7 +44,6 @@ const limitRecipeTitle = (title, charLimit = 17) => {
 Utility function, used just within this module, to render the current recipe into the DOM
 */
 const renderRecipe = recipe => {
-
     const markUP = `
         <li>
             <a class="results__link" href="#${recipe.recipe_id}">

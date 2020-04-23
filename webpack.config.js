@@ -4,10 +4,10 @@ module.exports = {
     entry: ['babel-polyfill', './src/js/index.js'], // entry point of the resultant code                  
     output: {
         path: path.resolve(__dirname,'dist'),       // absolute path down to dist/js folder
-        //sourceMapFilename: '[name].js.map',          // source maps file name
+        sourceMapFilename: '[name].js.map',          // source maps file name
         filename: 'js/bundle.js'                   // the name of the output bundle
     },
-    //devtool: 'source-map',                     // Generate WebPack Source Maps for debugging
+    devtool: 'source-map',                     // Generate WebPack Source Maps for debugging
     devServer: {                                    // definitions for the local development server (hot re-load)
         contentBase: './dist/'                      // where we should server our content from
     },
